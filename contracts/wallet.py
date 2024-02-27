@@ -8,7 +8,11 @@ class Wallet:
     account = w3.eth.account.create()
 
     def __init__(self) -> None:
-        pass
+        mnemonic = os.environ.get("MNEMONIC")
+        if mnemonic:
+            self.w3.eth.account.enable_unaudited_hdwallet_features()
+            self.account = self.w3.eth.account.from_mnemonic(mnemonic)
+            print("loaded account from mnemonic", self.account.address)
 
     def address(self) -> str:
         return self.account.address

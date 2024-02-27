@@ -11,6 +11,7 @@ brew tap ethereum/ethereum
 brew install solidity
 npx hardhat init
 npm install
+cp example.env .env
 ```
 
 ### Build

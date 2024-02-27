@@ -1,5 +1,5 @@
+from dotenv import load_dotenv
 import typer
-
 from parkingmachine import run_service
 
 app = typer.Typer()
@@ -30,4 +30,6 @@ def service(contract_address: str):
     run_service(contract_address)
 
 if __name__ == "__main__":
+
+    load_dotenv()
     app()
