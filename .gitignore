@@ -164,3 +164,4 @@ cython_debug/
 /cache
 /node_modules
 package-lock.json
+artifacts/

@@ -7,6 +7,8 @@ Smart Parking Credits Services
 
 ```bash
 brew install poetry
+brew tap ethereum/ethereum
+brew install solidity
 npx hardhat init
 npm install
 ```
@@ -24,6 +26,14 @@ npx hardhat compile
 ```
 
 ### Test
+
+Run a Node:
+
+```bash
+npx hardhat node
+```
+
+Run tests:
 
 ```bash
 poetry run pytest
