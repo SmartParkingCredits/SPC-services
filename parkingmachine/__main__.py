@@ -1,18 +1,8 @@
 from dotenv import load_dotenv
 import typer
-from parkingmachine import run_service
+from parkingmachine import run_service, deploy_contract
 
 app = typer.Typer()
-
-def deploy_contract():
-    """
-    Function to handle the deployment logic.
-    You can add your deployment code here.
-    """
-    print("Deploying the smart contract...")
-    # Add your deployment code here
-    # For example, compile the contract, connect to Ethereum, and deploy
-    print("Smart contract deployed successfully!")
 
 
 @app.command()
