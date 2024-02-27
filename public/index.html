@@ -82,10 +82,10 @@
 
                     try {
                         const totalCarsEntered = await contract.methods
-                            .getTotalCarsEntered()
+                            .totalCarsEntered()
                             .call();
                         const totalCarsLeft = await contract.methods
-                            .getTotalCarsLeft()
+                            .totalCarsLeft()
                             .call();
 
                         document.getElementById("carsEntered").innerText =
