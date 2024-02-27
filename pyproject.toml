@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "spc-services"
+version = "0.1.0"
+description = "Smart Parking Credits Services"
+authors = ["Smart Parking Credits Team"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
