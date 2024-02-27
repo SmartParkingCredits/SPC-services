@@ -11,7 +11,39 @@ def enter(address: str, value):
     w3 = wallet.w3
     parking_lot = parking_lot_contract(w3, address)
     value_wei = w3.to_wei(value, 'ether')
-    tx = parking_lot.functions.enter().transact({'from': account.address, 'value': int(value_wei)})
+    estimated_gas = parking_lot.functions.enter().estimate_gas()
+    transaction = {
+        'from': wallet.account.address,
+        'gas': estimated_gas,
+        'gasPrice': w3.to_wei('50', 'gwei'),
+        'nonce': w3.eth.get_transaction_count(wallet.account.address),
+        'value': int(value_wei)
+    }
+
+    # Sign and send the transaction
+    tx = wallet.sign_and_send_transaction(parking_lot.functions.enter().build_transaction(transaction))
+    print(f"Transaction hash: {tx.hex()}")
+    tx_receipt = w3.eth.wait_for_transaction_receipt(tx)
+    print(f"Block hash: {tx_receipt.blockHash.hex()}")
+    print(f"Transaction included in block: {tx_receipt.blockNumber}")
+    return tx, tx_receipt
+
+def exit(address: str, value):
+    wallet = Wallet()
+    account = wallet.account
+    w3 = wallet.w3
+    parking_lot = parking_lot_contract(w3, address)
+    value_wei = w3.to_wei(value, 'ether')
+    estimated_gas = parking_lot.functions.exit().estimate_gas()
+    transaction = {
+        'from': wallet.account.address,
+        'gas': estimated_gas,
+        'gasPrice': w3.to_wei('50', 'gwei'),
+        'nonce': w3.eth.get_transaction_count(wallet.account.address)
+    }
+
+    # Sign and send the transaction
+    tx = wallet.sign_and_send_transaction(parking_lot.functions.exit().build_transaction(transaction))
     print(f"Transaction hash: {tx.hex()}")
     tx_receipt = w3.eth.wait_for_transaction_receipt(tx)
     print(f"Block hash: {tx_receipt.blockHash.hex()}")
@@ -26,6 +58,6 @@ def process(value: str):
 
     if method == "enter":
         print("enter", contract)
-        #return enter(contract, 0.1)
+        return enter(contract, 0.0001)
     elif method == "exit":
         print("exit")

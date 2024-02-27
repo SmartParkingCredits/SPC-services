@@ -1,4 +1,4 @@
-from client import read_qr_codes, enter as car_enter, process
+from client import read_qr_codes, enter as car_enter, exit as car_exit, process
 
 from dotenv import load_dotenv
 import typer
@@ -28,8 +28,15 @@ def enter(contract_address: str):
     Enter
     """
     print("Car says hello")
-    tx = car_enter(contract_address, 0.11)
+    tx = car_enter(contract_address, 0.000001)
 
+@app.command()
+def exit(contract_address: str):
+    """
+    Exit
+    """
+    print("Car says hello")
+    tx = car_exit(contract_address, 0.000001)
 
 if __name__ == "__main__":
 
