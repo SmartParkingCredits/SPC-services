@@ -7,12 +7,20 @@ Smart Parking Credits Services
 
 ```bash
 brew install poetry
+npx hardhat init
+npm install
 ```
 
 ### Build
 
 ```bash
 poetry build
+```
+
+### Compile Contracts
+
+```bash
+npx hardhat compile
 ```
 
 ### Test
