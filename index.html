@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Parking Lot Stats</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
+            }
+            .stats {
+                text-align: center;
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
+    </head>
+    <body>
+        <div class="stats">
+            <h1>Parking Lot Statistics</h1>
+            <p>Total Cars Entered: <span id="carsEntered">0</span></p>
+            <p>Total Cars Left: <span id="carsLeft">0</span></p>
+        </div>
+
+        <script>
+            function getQueryVariable(variable) {
+                const query = window.location.search.substring(1);
+                const vars = query.split("&");
+                for (let i = 0; i < vars.length; i++) {
+                    const pair = vars[i].split("=");
+                    if (decodeURIComponent(pair[0]) == variable) {
+                        return decodeURIComponent(pair[1]);
+                    }
+                }
+                console.log("Query variable %s not found", variable);
+            }
+
+            async function loadStats() {
+                const projectId = getQueryVariable("projectId");
+                const contractAddress = getQueryVariable("contractAddress");
+                if (projectId && contractAddress) {
+                    const web3 = new Web3(
+                        `https://sepolia.infura.io/v3/${projectId}`,
+                    );
+                    const contractABI = [
+                        {
+                            inputs: [],
+                            name: "totalCarsEntered",
+                            outputs: [
+                                {
+                                    internalType: "uint256",
+                                    name: "",
+                                    type: "uint256",
+                                },
+                            ],
+                            stateMutability: "view",
+                            type: "function",
+                        },
+                        {
+                            inputs: [],
+                            name: "totalCarsLeft",
+                            outputs: [
+                                {
+                                    internalType: "uint256",
+                                    name: "",
+                                    type: "uint256",
+                                },
+                            ],
+                            stateMutability: "view",
+                            type: "function",
+                        },
+                    ];
+
+                    const contract = new web3.eth.Contract(
+                        contractABI,
+                        contractAddress,
+                    );
+
+                    try {
+                        const totalCarsEntered = await contract.methods
+                            .getTotalCarsEntered()
+                            .call();
+                        const totalCarsLeft = await contract.methods
+                            .getTotalCarsLeft()
+                            .call();
+
+                        document.getElementById("carsEntered").innerText =
+                            totalCarsEntered;
+                        document.getElementById("carsLeft").innerText =
+                            totalCarsLeft;
+                    } catch (error) {
+                        console.error("Error fetching contract data:", error);
+                    }
+                } else {
+                    console.log(
+                        "Project ID or Contract Address not provided in URL parameters.",
+                    );
+                }
+            }
+
+            loadStats();
+        </script>
+    </body>
+</html>
