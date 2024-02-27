@@ -9,8 +9,8 @@ def run_service(contract_address):
     account = wallet.account
     w3 = wallet.w3
     parking_lot = parking_lot_contract(w3, contract_address)
-    car_entered_filter = parking_lot.events.CarEntered.createFilter(fromBlock="latest")
-    car_exited_filter = parking_lot.events.CarExited.createFilter(fromBlock="latest")
+    car_entered_filter = parking_lot.events.CarEntered.create_filter(fromBlock="latest")
+    car_exited_filter = parking_lot.events.CarExited.create_filter(fromBlock="latest")
 
     while True:
         for carEnteredEvent in car_entered_filter.get_new_entries():
