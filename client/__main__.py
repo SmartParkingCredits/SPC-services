@@ -28,7 +28,7 @@ def enter(contract_address: str):
     Enter
     """
     print("Car says hello")
-    tx = car_enter(contract_address, 0.000001)
+    tx = car_enter(contract_address, 0.0001)
 
 @app.command()
 def exit(contract_address: str):
@@ -36,7 +36,7 @@ def exit(contract_address: str):
     Exit
     """
     print("Car says hello")
-    tx = car_exit(contract_address, 0.000001)
+    tx = car_exit(contract_address, 0.0001)
 
 if __name__ == "__main__":
 

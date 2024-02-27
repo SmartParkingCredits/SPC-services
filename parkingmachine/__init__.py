@@ -9,15 +9,30 @@ def run_service(contract_address):
     account = wallet.account
     w3 = wallet.w3
     parking_lot = parking_lot_contract(w3, contract_address)
-    state = float(w3.eth.get_balance(contract_address))
+
     print("Contract address: ", parking_lot.address)
+
+    balance = float(w3.eth.get_balance(contract_address))
+    print(f"Contract balance: {balance}")
+
+    prev_entered = parking_lot.functions.totalCarsEntered().call()
+    prev_left = parking_lot.functions.totalCarsLeft().call()
+
+    print(f"Initial state: {prev_entered} cars entered, {prev_left} cars left")
+
     while True:
-        balance = float(w3.eth.get_balance(contract_address))
-        if balance > state:
+        # Check current states
+        current_entered = parking_lot.functions.totalCarsEntered().call()
+        current_left = parking_lot.functions.totalCarsLeft().call()
+
+        # Detect changes
+        if current_entered > prev_entered:
             handle_car_entered()
-        elif balance < state:
+            prev_entered = current_entered  # Update the previous state
+
+        if current_left > prev_left:
             handle_car_exited()
-        state = balance
+            prev_left = current_left  # Update the previous state
 
 
 def handle_car_entered():
