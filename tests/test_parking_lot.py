@@ -3,6 +3,9 @@ from web3.exceptions import ContractLogicError
 from solcx import compile_source
 import json
 import pytest
+from contracts import parking_lot_contract
+
+from client import enter as car_enter
 
 def test_enter_and_exit_parking_lot():
 
@@ -29,10 +32,10 @@ def test_enter_and_exit_parking_lot():
     ParkingLot = w3.eth.contract(abi=abi, bytecode=bytecode)
     tx_hash = ParkingLot.constructor().transact()
     tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-    parking_lot = w3.eth.contract(
-        address=tx_receipt.contractAddress,
-        abi=abi
-    )
+
+    address = tx_receipt.contractAddress
+
+    parking_lot = parking_lot_contract(w3, address)
 
     # Interact with the contract
     #enter_tx = parking_lot.functions.enter().transact({'value': w3.to_wei(0.00001, 'ether')})
@@ -120,8 +123,9 @@ def test_insufficient_payment():
         abi=abi
     )
 
+    address = tx_receipt.contractAddress
+
     with pytest.raises(ContractLogicError) as excinfo:
-        enter_tx = parking_lot.functions.enter().transact({'value': w3.to_wei(0.00001, 'ether')})
-        w3.eth.wait_for_transaction_receipt(enter_tx)
+        car_enter(address, 0.00001)
 
     assert "Insufficient payment" in str(excinfo.value)

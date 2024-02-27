@@ -5,7 +5,7 @@ description = "Smart Parking Credits Services"
 authors = ["Smart Parking Credits Team"]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "contracts" }]
+packages = [{ include = "contracts" }, { include = "client" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
