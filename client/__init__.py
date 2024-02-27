@@ -60,4 +60,5 @@ def process(value: str):
         print("enter", contract)
         return enter(contract, 0.0001)
     elif method == "exit":
-        print("exit")
+        print("exit", contract)
+        return enter(contract, 0.0001)

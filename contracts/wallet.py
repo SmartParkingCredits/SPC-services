@@ -11,7 +11,10 @@ class Wallet:
     def __init__(self) -> None:
         load_dotenv()
         self.node_url = os.environ.get("NODE_URL", 'http://127.0.0.1:8545') # 'https://sepolia.infura.io/v3/'
-        self.w3 = Web3(Web3.HTTPProvider(self.node_url))
+        if self.node_url.startswith("wss://"):
+            self.w3 = Web3(Web3.WebsocketProvider(self.node_url))
+        else:
+            self.w3 = Web3(Web3.HTTPProvider(self.node_url))
         print("node url", self.node_url)
         mnemonic = os.environ.get("MNEMONIC")
         if mnemonic:
