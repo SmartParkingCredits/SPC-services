@@ -20,6 +20,8 @@ opencv-python-headless = "^4.9.0.80"
 typer = "^0.9.0"
 python-dotenv = "^1.0.1"
 json5 = "^0.9.17"
+serial = "^0.0.97"
+pyserial = "^3.5"
 
 
 [tool.poetry.group.dev.dependencies]
