@@ -2,6 +2,8 @@ from contracts.wallet import Wallet
 from contracts import parking_lot_contract
 from web3 import Web3
 
+from .qrcodereader import *
+
 def enter(address: str, value):
     wallet = Wallet()
     account = wallet.account

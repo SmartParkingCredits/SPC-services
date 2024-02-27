@@ -4,8 +4,6 @@ from solcx import compile_source
 
 wallet = Wallet()
 
-print(wallet.address())
-
 def parking_lot_contract(w3: Web3, contractAddress: str):
     file = open('./contracts/ParkingLot.sol', 'r')
     contract_src = file.read()
