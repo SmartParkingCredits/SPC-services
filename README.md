@@ -39,3 +39,17 @@ Run tests:
 ```bash
 poetry run pytest
 ```
+
+## Run
+
+### Deploy
+
+```bash
+poetry run python parkingmachine deploy
+```
+
+### QR Code Scanner
+
+```bash
+poetry run python client qr
+```

@@ -836,6 +836,20 @@ files = [
 ]
 
 [[package]]
+name = "json5"
+version = "0.9.17"
+description = "A Python implementation of the JSON5 data format."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "json5-0.9.17-py2.py3-none-any.whl", hash = "sha256:f8ec1ecf985951d70f780f6f877c4baca6a47b6e61e02c4cd190138d10a7805a"},
+    {file = "json5-0.9.17.tar.gz", hash = "sha256:717d99d657fa71b7094877b1d921b1cce40ab444389f6d770302563bb7dfd9ae"},
+]
+
+[package.extras]
+dev = ["hypothesis"]
+
+[[package]]
 name = "jsonschema"
 version = "4.21.1"
 description = "An implementation of JSON Schema validation for Python"
@@ -1939,4 +1953,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "920eed0bfabc43c468592c2a6744c8350596aed7c347c67b9ecdf41ed3da8193"
+content-hash = "61e2ab147bc849f7978972524c5238d88633cd9caeafa484e5fc27f7b5d1a3f2"

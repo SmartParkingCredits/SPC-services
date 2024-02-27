@@ -1,4 +1,4 @@
-from client import read_qr_codes, enter as car_enter
+from client import read_qr_codes, enter as car_enter, process
 
 from dotenv import load_dotenv
 import typer
@@ -11,7 +11,16 @@ def qr():
     Scan QR code.
     """
     print("Car says hello")
-    read_qr_codes(callback=print)
+    read_qr_codes(callback=process)
+
+@app.command()
+def park():
+    """
+    Scan QR code to park.
+    """
+    print("Car says hello")
+    print("Searching for QR code...")
+    read_qr_codes(callback=process)
 
 @app.command()
 def enter(contract_address: str):

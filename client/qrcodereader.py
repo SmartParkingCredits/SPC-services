@@ -11,7 +11,6 @@ def qr_code_detected(data):
 def read_qr_codes(callback=qr_code_detected):
     # Initialize the camera
     cap = cv2.VideoCapture(0)
-
     # Initialize the QR Code detector
     detector = cv2.QRCodeDetector()
 
@@ -23,9 +22,13 @@ def read_qr_codes(callback=qr_code_detected):
             break
 
         # Detect and decode the QR code in the frame
-        data, bbox, _ = detector.detectAndDecode(frame)
+        try:
+            data, bbox, _ = detector.detectAndDecode(frame)
+            # Check if there is a QR Code in the image
+            if bbox is not None and data:
+                callback(data)
+        except Exception as e:
+            print(f"Error: {e}")
+            continue
 
-        # Check if there is a QR Code in the image
-        if bbox is not None and data:
-            callback(data)
     cap.release()

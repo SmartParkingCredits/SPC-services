@@ -54,7 +54,18 @@ def deploy_contract():
 
     # Deploy the contract
     ParkingLot = w3.eth.contract(abi=abi, bytecode=bytecode)
-    tx_hash = ParkingLot.constructor().transact()
+    estimated_gas = ParkingLot.constructor().estimate_gas()
+
+    # Prepare the transaction
+    transaction = {
+        'from': wallet.account.address,
+        'gas': estimated_gas,
+        'gasPrice': w3.to_wei('50', 'gwei'),
+        'nonce': w3.eth.get_transaction_count(wallet.account.address),
+    }
+
+    # Sign and send the transaction
+    tx_hash = wallet.sign_and_send_transaction(ParkingLot.constructor().build_transaction(transaction))
     tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
     address = tx_receipt.contractAddress
