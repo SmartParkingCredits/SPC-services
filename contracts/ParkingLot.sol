@@ -4,7 +4,7 @@ contract ParkingLot {
     address public owner;
     mapping(address => uint256) public entryTimes;
     mapping(address => uint256) public etherCredit;
-    uint256 public constant hourlyRate = 0.1 ether; // Adjust as needed
+    uint256 public constant hourlyRate = 0.1 gwei; // Adjust as needed
 
     event CarEntered(address indexed car, uint256 entryTime, uint256 ethCredit);
     event CarExited(address indexed car, uint256 exitTime, uint256 fee);
