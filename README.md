@@ -2,7 +2,10 @@
 Smart Parking Credits Services
 
 ## Video
-![Video](/presentation/Smart_Parking_Credits.mp4)
+![Video](presentation/Smart_Parking_Credits.mp4)
+
+## Presentation
+![Presentation](presentation/Smart_Parking_Credits_Presentation.pdf)
 
 ## Getting Started
 
