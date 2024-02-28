@@ -2,6 +2,9 @@ from contracts.wallet import Wallet
 from contracts import parking_lot_contract
 from web3 import Web3
 from solcx import compile_source
+from .servo import Servo
+import os
+import time
 
 def run_service(contract_address):
     print("Service running")
@@ -37,10 +40,21 @@ def run_service(contract_address):
 
 def handle_car_entered():
     print("Car entered: ")
+    port = os.getenv('SERVO_PORT')
+    servo = Servo(port)
+    servo.connect()
+    servo.move_servo(90)
+    time.sleep(4)
+    servo.move_servo(45)
 
 def handle_car_exited():
     print("Car exited: ")
-
+    port = os.getenv('SERVO_PORT')
+    servo = Servo(port)
+    servo.connect()
+    servo.move_servo(90)
+    time.sleep(4)
+    servo.move_servo(45)
 
 def deploy_contract():
     """

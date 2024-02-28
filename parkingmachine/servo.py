@@ -37,15 +37,15 @@ class Servo:
 # Example usage
 if __name__ == "__main__":
     # Replace '/dev/ttyACM0' with your Arduino's serial port
-    arduino_servo = Servo('/dev/cu.usbmodem1431401')
+    arduino_servo = Servo('/dev/cu.usbmodem141301')
 
     try:
-        # Move the servo to 90 degrees
-        arduino_servo.move_servo(90)
-        time.sleep(2)  # Wait for the servo to move
-
         # Move the servo to 45 degrees
         arduino_servo.move_servo(45)
+        time.sleep(3)  # Wait for the servo to move
+
+        # Move the servo to 90 degrees
+        arduino_servo.move_servo(90)
         time.sleep(2)  # Wait for the servo to move
 
     except KeyboardInterrupt:
