@@ -53,7 +53,7 @@ def read_qr_codes(callback=qr_code_detected):
                 continue
     else:
         # Fallback to using OpenCV for capturing frames
-        cap = cv2.VideoCapture(int(video_device))
+        cap = cv2.VideoCapture(video_device)
         detector = cv2.QRCodeDetector()
 
         while True:
