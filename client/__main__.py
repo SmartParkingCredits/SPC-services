@@ -1,4 +1,4 @@
-from client import read_qr_codes, enter as car_enter, exit as car_exit, process
+from client import install_solidity_compiler, read_qr_codes, enter as car_enter, exit as car_exit, process, install_solidity_compiler
 
 from dotenv import load_dotenv
 import typer
@@ -41,4 +41,5 @@ def exit(contract_address: str):
 if __name__ == "__main__":
 
     load_dotenv()
+    install_solidity_compiler()
     app()
