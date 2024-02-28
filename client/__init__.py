@@ -9,6 +9,7 @@ def install_solidity_compiler():
     solcx.compile_solc('0.8.0')
 
 def enter(address: str, value):
+    print(f"Entering parking lot at {address} with {value} ETH")
     wallet = Wallet()
     account = wallet.account
     w3 = wallet.w3
@@ -36,6 +37,7 @@ def enter(address: str, value):
     return tx, tx_receipt
 
 def exit(address: str, value):
+    print(f"Exiting parking lot at {address} with {value} ETH")
     wallet = Wallet()
     account = wallet.account
     w3 = wallet.w3
@@ -70,4 +72,4 @@ def process(value: str):
         return enter(contract, 0.0001)
     elif method == "exit":
         print("exit", contract)
-        return enter(contract, 0.0001)
+        return exit(contract, 0.0001)
