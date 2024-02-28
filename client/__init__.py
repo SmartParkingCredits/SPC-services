@@ -2,12 +2,11 @@ from contracts.wallet import Wallet
 from contracts import parking_lot_contract
 from web3 import Web3
 import json5
-from solcx import get_installable_solc_versions, install_solc
+import solcx
 from .qrcodereader import *
 
 def install_solidity_compiler():
-    print(get_installable_solc_versions())
-    install_solc('0.8.0')
+    solcx.compile_solc('0.8.0')
 
 def enter(address: str, value):
     wallet = Wallet()
