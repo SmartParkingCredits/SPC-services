@@ -1,5 +1,6 @@
 import cv2
 import sys
+import os
 
 def qr_code_detected(data):
     """
@@ -9,8 +10,9 @@ def qr_code_detected(data):
     print(f"QR Code detected: {data}")
 
 def read_qr_codes(callback=qr_code_detected):
+    video_device = os.environ.get("VIDEO_DEVICE", 0)
     # Initialize the camera
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(video_device)
     # Initialize the QR Code detector
     detector = cv2.QRCodeDetector()
 
